@@ -1,8 +1,7 @@
 import streamlit as st
 
 st.title('Road Accident Risk Prediction')
-
-st.write('The risk prediction for your chosen values is:')
+st.write('The chance of of road accident is :')
 
 with st.sidebar:
   st.header('Choose variables for prediction')
