@@ -44,11 +44,10 @@ input_data = pd.DataFrame(data, index=[0])
 # Adjust input format as per the model
 # Encode variables
 df_road = pd.get_dummies(input_data,columns=['lighting','weather'])
-st.write("df_shape",df_road.shape)
 
 # Convert boolean variables to int
-#df_road['road_signs_present'] = df_road['road_signs_present'].astype(int)
-
+df_road['road_signs_present'] = df_road['road_signs_present'].astype(int)
+st.write("df_shape",df_road[:1])
 # Transform variable
 #df_road['speed_limit'] = np.log(df_road['speed_limit'])
 #scaler = MinMaxScaler(feature_range=(0,1))
