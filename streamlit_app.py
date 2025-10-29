@@ -21,6 +21,8 @@ road_model = load_model()
 
 st.title('Road Accident Risk Prediction')
 
+st.button("Predict")
+
 with st.sidebar:
   st.header('Choose conditions for safe driving')
   curvature  = st.slider('Road Curvature',0.0,1.0)
@@ -37,6 +39,8 @@ data  = { 'curvature':curvature,
          'weather': weather, 
          'road_signs_present':road_signs_present
         }
+
+
 if st.button("Predict"):
      
     input_data = pd.DataFrame(data, index=[0])
