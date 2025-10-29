@@ -28,7 +28,9 @@ with st.sidebar:
   speed_limit = st.slider('Speed Limit', 25,70)
   lighting = st.selectbox('Lighting',('daylight','dim', 'night'))
   weather = st.selectbox('Weather',('rainy','clear', 'foggy'))
-  road_signs_present = st.selectbox('Road Signs Present',('True','False'))
+  # Selectbox with True and False as options  
+  road_signs_present = st.selectbox('Road Signs Present',options=[True, False],index=0)
+    
 
 data  = { 'curvature':curvature, 
          'speed_limit':speed_limit,
