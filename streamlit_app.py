@@ -69,7 +69,7 @@ st.write("input_shape",input_row.shape)
         
 #prediction = road_model.predict(input_row)
 #st.subheader(f"The chance of road accident is :{prediction[0]}")
-x = 80
+x = 0.80
 st.subheader(f"The chance of road accident is : {x * 100}%")
                                                           
                           
