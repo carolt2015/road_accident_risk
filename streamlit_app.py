@@ -1,4 +1,7 @@
 import streamlit as st
+import pickle
+
+<!-- load the trained model -->
 
 st.title('Road Accident Risk Prediction')
 st.write('The chance of of road accident is :')
