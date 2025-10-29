@@ -68,6 +68,6 @@ input_row = df_road_poly[:1]
 st.write("input_shape",input_row.shape)
         
 #prediction = road_model.predict(input_row)
-#st.write(f"The chance of of road accident is :{prediction[0]}")
+st.subheader(f"The chance of of road accident is :{prediction[0]}")
                                                           
                           
