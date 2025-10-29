@@ -23,7 +23,7 @@ st.title('Road Accident Risk Prediction')
 st.write('The chance of road accident is :')
 
 with st.sidebar:
-  st.header('Choose variables for safe driving')
+  st.header('Choose conditions for safe driving')
   curvature  = st.slider('Road Curvature',0.0,1.0)
   speed_limit = st.slider('Speed Limit', 25,70)
   lighting = st.selectbox('Lighting',('daylight','dim', 'night'))
@@ -66,16 +66,16 @@ input_row = df_road_poly[:1]
 
 # For Debugging, remove after testing
 st.write("input_shape",input_row.shape)
-        
-#prediction = road_model.predict(input_row)
-#st.subheader(f"The chance of road accident is :{prediction[0] * 100}%")
-x = 0.35
-st.subheader(f"At the chosen conditions, the chance of road accident is :")
-st.write("green[x * 100]%")
-if x >= 0.5:
-    st.write("red[Please drive safely!]")
-else:
-     st.write("green[Have a great trip!]")
+
+if st.button("Predict"):
+    #prediction = road_model.predict(input_row)
+    #st.success(f"The chance of road accident is :{prediction[0] * 100}%")
+    if prediction[0] >= 0.5:
+        st.subheader("Please drive safely!")
+    else:
+        st.subheader("That's great!")
+
+
 
                                                           
                           
