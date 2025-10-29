@@ -72,6 +72,9 @@ st.write("input_shape",input_row.shape)
 x = 0.80
 st.subheader(f"At the chosen conditions, the chance of road accident is : {x * 100}%")
 if x > 0.5:
-    st.write("Please drive safely")
+    st.subheader("Please drive safely")
+else:
+     st.subheader("Have a great trip")
+
                                                           
                           
