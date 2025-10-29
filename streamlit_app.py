@@ -59,19 +59,13 @@ df_road['speed_limit'] = scaler.fit_transform(df_road[['speed_limit']])
 poly = PolynomialFeatures(2)
 df_road_poly = poly.fit_transform(df_road)
 
-# For Debugging, remove after testing
-st.write("df_road_poly",df_road_poly.shape)
-
 # Input data for prediction
 input_row = df_road_poly[:1]
 
 # For Debugging, remove after testing
 st.write("input_shape",input_row.shape)
-
-# For Debugging, remove after testing
-#st.write("Poly shape", df_road_poly.shape)
-         
-#prediction = road_model.predict(input_row)
-#st.write(f"The chance of of road accident is :{prediction[0]}")
+        
+prediction = road_model.predict(input_row)
+st.write(f"The chance of of road accident is :{prediction[0]}")
                                                           
                           
