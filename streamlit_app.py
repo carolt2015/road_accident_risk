@@ -21,8 +21,6 @@ road_model = load_model()
 
 st.title('Road Accident Risk Prediction')
 
-st.button("Predict")
-
 with st.sidebar:
   st.header('Choose conditions for safe driving')
   curvature  = st.slider('Road Curvature',0.0,1.0)
