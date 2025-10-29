@@ -3,8 +3,11 @@ import pickle
 from sklearn.preprocessing import MinMaxScaler
 
 # load the trained model 
-with open('model.pkl', 'rb') as file:
-  road_model = pickle.load(file)  
+try:
+  with open('model.pkl', 'rb') as file:
+    road_model = pickle.load(file) 
+except FileNotFoundError:
+            st.error("Model file 'model.pkl' not found. Please ensure it's in the correct path.")  
 
 st.title('Road Accident Risk Prediction')
 st.write('The chance of of road accident is :')
