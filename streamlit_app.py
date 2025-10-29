@@ -23,7 +23,7 @@ st.title('Road Accident Risk Prediction')
 st.write('The chance of road accident is :')
 
 with st.sidebar:
-  st.header('Choose variables for prediction')
+  st.header('Choose variables for safe driving')
   curvature  = st.slider('Road Curvature',0.0,1.0)
   speed_limit = st.slider('Speed Limit', 25,70)
   lighting = st.selectbox('Lighting',('daylight','dim', 'night'))
@@ -71,5 +71,7 @@ st.write("input_shape",input_row.shape)
 #st.subheader(f"The chance of road accident is :{prediction[0] * 100}%")
 x = 0.80
 st.subheader(f"At the chosen conditions, the chance of road accident is : {x * 100}%")
+if x > 0.5:
+    st.write("Please drive safely")
                                                           
                           
