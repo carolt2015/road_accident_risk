@@ -29,6 +29,7 @@ with st.sidebar:
   weather = st.selectbox('Weather',('rainy','clear', 'foggy'))
   # Selectbox with True and False as options  
   road_signs_present = st.selectbox('Road Signs Present',options=[True, False],index=0)
+  predicted = st.button("Predict")  
     
 
 data  = { 'curvature':curvature, 
@@ -39,7 +40,7 @@ data  = { 'curvature':curvature,
         }
 
 
-if st.button("Predict"):
+if predicted:
      
     input_data = pd.DataFrame(data, index=[0])
 
