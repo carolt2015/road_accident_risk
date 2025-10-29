@@ -66,7 +66,7 @@ st.write("df_road_poly",df_road_poly.shape)
 input_row = df_road_poly[:1]
     
     #if st.button("Predict"):
-if predicted:
+#if predicted:
     #prediction = road_model.predict(input_row)
     #st.success(f"The chance of road accident is :{prediction[0] * 100}%")
     #if prediction[0] >= 0.5:
