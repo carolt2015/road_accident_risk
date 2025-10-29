@@ -1,11 +1,14 @@
 import streamlit as st
 import pickle 
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
 from pathlib import Path
 
-# Assuming model.pkl is in the same directory as your app.py
+# Assuming model.pkl is in the same directory as the app.py
 model_path = Path(__file__).parent / "model.pkl"
 
+# Cache and load the trained model
 @st.cache_resource
 def load_model():
     with open(model_path, 'rb') as file:
@@ -47,11 +50,15 @@ df_road['speed_limit'] = np.log(df_road['speed_limit'])
 scaler = MinMaxScaler(feature_range=(0,1))
 df_road['speed_limit'] = scaler.fit_transform(df_road[['speed_limit']])
 
+# Transform data with polynomial features
+poly = PolynomialFeatures(2)
+df_road_poly = poly.fit_transform(df_road)
+
 # Input data for prediction
-input_row = df_road[:1]
+input_row = df_road_poly[:1]
 
 # for debug, remove after testing
-st.write(df_road[:1])
+st.write(df_road_poly[:1])
          
 prediction = road_model.predict(input_row)
 st.write(f"The chance of of road accident is :{prediction[0]}")
