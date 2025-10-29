@@ -69,12 +69,12 @@ st.write("input_shape",input_row.shape)
         
 #prediction = road_model.predict(input_row)
 #st.subheader(f"The chance of road accident is :{prediction[0] * 100}%")
-x = 0.80
+x = 0.35
 st.subheader(f"At the chosen conditions, the chance of road accident is : {x * 100}%")
 if x > 0.5:
-    st.subheader("Please drive safely")
+    st.subheader("Please drive safely!")
 else:
-     st.subheader("Have a great trip")
+     st.subheader("Have a great trip!")
 
                                                           
                           
