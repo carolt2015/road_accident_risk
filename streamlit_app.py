@@ -1,13 +1,18 @@
 import streamlit as st
 import pickle 
 from sklearn.preprocessing import MinMaxScaler
+from pathlib import Path
 
-# load the trained model 
-try:
-  with open('model.pkl', 'rb') as file:
-    road_model = pickle.load(file) 
-except FileNotFoundError:
-            st.error("Model file 'model.pkl' not found. Please ensure it's in the correct path.")  
+# Assuming model.pkl is in the same directory as your app.py
+model_path = Path(__file__).parent / "model.pkl"
+
+@st.cache_resource
+def load_model():
+    with open(model_path, 'rb') as file:
+        model = pickle.load(file)
+    return model
+
+road_model = load_model()  
 
 st.title('Road Accident Risk Prediction')
 st.write('The chance of of road accident is :')
