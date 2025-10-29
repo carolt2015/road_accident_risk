@@ -20,7 +20,7 @@ def load_model():
 road_model = load_model()  
 
 st.title('Road Accident Risk Prediction')
-st.write('The chance of of road accident is :')
+st.write('The chance of road accident is :')
 
 with st.sidebar:
   st.header('Choose variables for prediction')
@@ -68,7 +68,8 @@ input_row = df_road_poly[:1]
 st.write("input_shape",input_row.shape)
         
 #prediction = road_model.predict(input_row)
-#st.subheader(f"The chance of of road accident is :{prediction[0]}")
-st.subheader("The chance of of road accident is :")
+#st.subheader(f"The chance of road accident is :{prediction[0]}")
+x = 80
+st.subheader(f"The chance of road accident is : {x * 100}%")
                                                           
                           
