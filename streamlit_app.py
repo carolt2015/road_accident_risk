@@ -60,7 +60,7 @@ poly = PolynomialFeatures(2)
 df_road_poly = poly.fit_transform(df_road)
 
 # For Debugging, remove after testing
-st.write("df_road_shape",df_road.shape)
+st.write("df_road_poly",df_road_poly.shape)
 
 # Input data for prediction
 input_row = df_road_poly[:1]
