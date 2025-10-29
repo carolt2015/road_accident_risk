@@ -44,7 +44,7 @@ input_data = pd.DataFrame(data, index=[0])
 # Adjust input format as per the model
 # Encode variables
 encode = ['lighting','weather']
-df_road = pd.get_dummies(input_data,columns=['lighting','weather'], prefix=encode)
+df_road = pd.get_dummies(input_data,columns=['lighting','weather'], prefix=encode).astype(int)
 
 st.write("df_shape",df_road[:1])
 
