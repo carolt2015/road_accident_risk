@@ -46,8 +46,6 @@ input_data = pd.DataFrame(data, index=[0])
 encode = ['lighting','weather']
 df_road = pd.get_dummies(input_data,columns=['lighting','weather'], prefix=encode).astype(int)
 
-st.write("df_shape",df_road[:1])
-
 # Convert boolean variables to int
 df_road['road_signs_present'] = df_road['road_signs_present'].astype(int)
 
@@ -56,20 +54,19 @@ df_road['speed_limit'] = np.log(df_road['speed_limit'])
 scaler = MinMaxScaler(feature_range=(0,1))
 df_road['speed_limit'] = scaler.fit_transform(df_road[['speed_limit']])
 
-st.write("df_shape",df_road[:1])
 
 # Transform data with polynomial features
-#poly = PolynomialFeatures(2)
-#df_road_poly = poly.fit_transform(df_road)
+poly = PolynomialFeatures(2)
+df_road_poly = poly.fit_transform(df_road)
 
 # For Debugging, remove after testing
-#st.write("df_road_shape",df_road.shape)
+st.write("df_road_shape",df_road.shape)
 
 # Input data for prediction
-#input_row = df_road_poly[:1]
+input_row = df_road_poly[:1]
 
 # For Debugging, remove after testing
-#st.write("input_shape",df_road.shape)
+st.write("input_shape",input_row.shape)
 
 # For Debugging, remove after testing
 #st.write("Poly shape", df_road_poly.shape)
