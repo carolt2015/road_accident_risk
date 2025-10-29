@@ -44,7 +44,7 @@ input_data = pd.DataFrame(data, index=[0])
 # Adjust input format as per the model
 # Encode variables
 encode = ['lighting','weather']
-df_road = pd.get_dummies(input_data,columns=['lighting','weather'], prefix=encode)
+df_road = pd.get_dummies(input_data,columns=['lighting','weather'], prefix=encode,dtype=float)
 
 # Convert boolean variables to int
 df_road['road_signs_present'] = df_road['road_signs_present'].astype(int)
@@ -57,7 +57,9 @@ df_road['speed_limit'] = scaler.fit_transform(df_road[['speed_limit']])
 
 # Transform data with polynomial features
 poly = PolynomialFeatures(2)
-df_road_poly = poly.fit_transform(df_road)
+df_road_poly =  poly.fit_transform(df_road)
+st.write("df_road",df_road.shape)
+st.write("df_road_poly",df_road_poly.shape)
 
 # Input data for prediction
 input_row = df_road_poly[:1]
