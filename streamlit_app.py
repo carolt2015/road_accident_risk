@@ -20,7 +20,6 @@ def load_model():
 road_model = load_model()  
 
 st.title('Road Accident Risk Prediction')
-st.write('The chance of road accident is :')
 
 with st.sidebar:
   st.header('Choose conditions for safe driving')
@@ -58,22 +57,20 @@ df_road['speed_limit'] = scaler.fit_transform(df_road[['speed_limit']])
 # Transform data with polynomial features
 poly = PolynomialFeatures(2)
 df_road_poly =  poly.fit_transform(df_road)
+
 st.write("df_road",df_road.shape)
 st.write("df_road_poly",df_road_poly.shape)
 
 # Input data for prediction
 input_row = df_road_poly[:1]
 
-# For Debugging, remove after testing
-st.write("input_shape",input_row.shape)
-
-if st.button("Predict"):
+#if st.button("Predict"):
     #prediction = road_model.predict(input_row)
     #st.success(f"The chance of road accident is :{prediction[0] * 100}%")
-    if prediction[0] >= 0.5:
-        st.subheader("Please drive safely!")
-    else:
-        st.subheader("That's great!")
+    #if prediction[0] >= 0.5:
+    #    st.subheader("Please drive safely!")
+    #else:
+    #    st.subheader("That's great!")
 
 
 
