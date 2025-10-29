@@ -7,8 +7,9 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
 from pathlib import Path
 
-# Assuming model.pkl is in the same directory as the app.py
+# Assuming pkl's are in the same directory as the app.py
 model_path = Path(__file__).parent / "model.pkl"
+scaler_path = Path(__file__).parent / "scaler.pkl"
 
 # Cache and load the trained model
 @st.cache_resource
@@ -16,8 +17,15 @@ def load_model():
     with open(model_path, 'rb') as file:
         model = pickle.load(file)
     return model
+    
+@st.cache_resource
+def load_scaler():
+    with open(scaler_path, 'rb') as file:
+        scaler = pickle.load(file)
+    return scaler    
 
-road_model = load_model()  
+road_model = load_model() 
+minmax_scaler = load_scaler()
 
 st.title('Road Accident Risk Prediction')
 
@@ -51,24 +59,20 @@ df_road['road_signs_present'] = df_road['road_signs_present'].astype(int)
 
 # Transform variable
 df_road['speed_limit'] = np.log(df_road['speed_limit'])
-scaler = MinMaxScaler(feature_range=(0,1))
-df_road['speed_limit'] = scaler.transform(df_road[['speed_limit']])
+df_road['speed_limit'] = minmax_scaler.transform(df_road[['speed_limit']])
 
 
 # Transform data with polynomial features
-poly = PolynomialFeatures(2)
-df_road_poly =  poly.fit_transform(df_road)
-
-st.write("df_road",df_road.shape)
-st.write("df_road_poly",df_road_poly.shape)
+#poly = PolynomialFeatures(2)
+#df_road_poly =  poly.fit_transform(df_road)
 
 # Input data for prediction
-input_row = df_road_poly[:1]
+input_row = df_road[:1]
     
-    #if st.button("Predict"):
-#if predicted:
-    #prediction = road_model.predict(input_row)
-    #st.success(f"The chance of road accident is :{prediction[0] * 100}%")
+    
+if predicted:
+    prediction = road_model.predict(input_row)
+    st.success(f"The chance of road accident is :{prediction[0] * 100}%")
     #if prediction[0] >= 0.5:
     #    st.subheader("Please drive safely!")
     #else:
