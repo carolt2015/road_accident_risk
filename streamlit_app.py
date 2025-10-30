@@ -49,7 +49,7 @@ st.write(" Dataframe shape",df_road.shape)
 encode = ['lighting','weather']
 
 df_dummies = pd.get_dummies(df_road,columns=['lighting','weather']).astype(int)
-df_road = pd.concat([df_road.drop(['lighting','weather'],axis=1),df_dummies, axis=1])
+df_road = pd.concat([df_road.drop(['lighting','weather'],axis=1),df_dummies], axis=1)
 st.write("After pd.dummies df_road shape",df_road.shape)
 st.write(df_road[:1])
 
