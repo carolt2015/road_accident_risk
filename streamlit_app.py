@@ -72,11 +72,11 @@ st.write(df_road[:1])
 # Transform variable
 df_road['speed_limit'] = np.log(df_road['speed_limit'])
 st.write(df_road[:1])
-df_road['speed_limit'] = minmax_scaler.fit_transform(df_road[['speed_limit']]).astype(float)
+df_road['speed_limit'] = minmax_scaler.fit(df_road[['speed_limit']]).astype(float)
 st.write(df_road[:1])
 
 # Transform data with polynomial features
-df_road_poly =  poly_features.fit_transform(df_road)
+df_road_poly =  poly_features.fit(df_road)
 st.write("df_road_poly",df_road_poly.shape)
 
 
