@@ -9,15 +9,18 @@ from pathlib import Path
 
 # Assuming pkl is in the same directory as the app.py
 model_path = Path(__file__).parent / "model.pkl"
+dummies_path = Path(__file__).parent / "dummies.pkl"
 
 # Cache and load the trained model
 @st.cache_resource
-def load_model():
+def load_resources():
     with open(model_path, 'rb') as file:
         model = pickle.load(file)
-    return model
+    with open(dummies_path, 'rb') as file:
+        dummies = pickle.load(file)    
+    return model,dummies
     
-road_model = load_model() 
+road_model,road_dummies = load_resources() 
 
 st.title('Road Accident Risk Prediction')
 
@@ -25,8 +28,8 @@ with st.sidebar:
   st.header('Choose conditions for safe driving')
   curvature  = st.slider('Road Curvature',0.0,1.0)
   speed_limit = st.slider('Speed Limit', 25,70)
-  lighting = st.selectbox('Lighting',('daylight','dim','night'))
-  weather = st.selectbox('Weather',('rainy','clear','foggy'))
+  lighting = st.selectbox('Lighting',['daylight','dim','night'])
+  weather = st.selectbox('Weather',['rainy','clear','foggy'])
   # Selectbox with True and False as options  
   road_signs_present = st.selectbox('Road Signs Present',options=[True, False],index=0)
 
@@ -46,7 +49,7 @@ df = pd.DataFrame(data,index=[0])
 # Adjust input format as per the model
 # Encode variables
 df_road = pd.get_dummies(df,columns=['lighting','weather'])
-
+st.write(df_road.shape)
 df_road['road_signs_present'] =  df_road['road_signs_present'] .astype(int)
 
 
