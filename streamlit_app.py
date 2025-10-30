@@ -49,9 +49,10 @@ st.write(" Dataframe shape",df_road.shape)
 encode = ['lighting','weather']
 
 df_dummies = pd.get_dummies(df_road,columns=['lighting','weather']).astype(int)
-df_road = pd.concat([df_road.drop(['lighting','weather'],axis=1),df_dummies], axis=1)
-st.write("After pd.dummies df_road shape",df_road.shape)
-st.write(df_road[:1])
+df_road_drop = df_road.drop(['lighting','weather'],axis=1)
+df_road = pd.concat([df_road_drop,df_dummies], axis=1)
+st.write("After pd.dummies df_dummies shape",df_dummies.shape)
+st.write(df_dummies[:1])
 
 
 # Convert boolean variables to int
@@ -62,7 +63,7 @@ df_road['speed_limit'] = np.log(df_road['speed_limit'])
 
 scaler = MinMaxScaler(feature_range=(0,1))
 df_road['speed_limit'] = scaler.fit_transform(df_road[['speed_limit']]).astype(float)
-st.write(df_road[:1])
+
 
 # Transform data with polynomial features
 poly = PolynomialFeatures(degree=2)
