@@ -25,8 +25,8 @@ with st.sidebar:
   st.header('Choose conditions for safe driving')
   curvature  = st.slider('Road Curvature',0.0,1.0)
   speed_limit = st.slider('Speed Limit', 25,70)
-  lighting = st.selectbox('Lighting',('daylight','dim', 'night'))
-  weather = st.selectbox('Weather',('rainy','clear', 'foggy'))
+  lighting = st.selectbox('Lighting',('daylight','dim','night'))
+  weather = st.selectbox('Weather',('rainy','clear','foggy'))
   # Selectbox with True and False as options  
   road_signs_present = st.selectbox('Road Signs Present',options=[True, False],index=0)
 
@@ -52,7 +52,7 @@ df_dummies = pd.get_dummies(df_road,columns=['lighting','weather']).astype(int)
 df_road_drop = df_road.drop(['lighting','weather'],axis=1)
 df_road = pd.concat([df_road_drop,df_dummies], axis=1)
 st.write("After pd.dummies df_dummies shape",df_dummies.shape)
-st.write("Dummies row",df_dummies[:1])
+
 
 
 # Convert boolean variables to int
