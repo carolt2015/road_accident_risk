@@ -35,7 +35,7 @@ def load_poly():
 
 road_model = load_model() 
 minmax_scaler = load_scaler()
-poly = load_poly()
+poly_features = load_poly()
 
 st.title('Road Accident Risk Prediction')
 
@@ -47,6 +47,8 @@ with st.sidebar:
   weather = st.selectbox('Weather',('rainy','clear', 'foggy'))
   # Selectbox with True and False as options  
   road_signs_present = st.selectbox('Road Signs Present',options=[True, False],index=0)
+
+  # For 'Predict' button  
   predicted = st.button("Predict")  
     
 
@@ -74,7 +76,7 @@ df_road['speed_limit'] = minmax_scaler.fit_transform(df_road[['speed_limit']]).a
 st.write(df_road[:1])
 
 # Transform data with polynomial features
-df_road_poly =  poly.fit_transform(df_road)
+df_road_poly =  poly_features.fit_transform(df_road)
 
 # Input data for prediction
 input_row = df_road_poly[:1]
