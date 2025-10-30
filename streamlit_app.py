@@ -59,19 +59,19 @@ data  = { 'curvature':curvature,
          'road_signs_present':road_signs_present
         }
     
-df_road = pd.DataFrame(data,index=[0])
-st.write("Input_data",df_road[:1])
-st.write("Input_data",df_road.shape)
+df_data = pd.DataFrame(data,index=[0])
+
 # Adjust input format as per the model
 # Encode variables
 encode = ['lighting','weather']
-df_road = pd.get_dummies(df_road,columns=['lighting','weather'], prefix=encode).astype(int)
-st.write("After pd.dummies",df_road.shape)
+input_df = pd.get_dummies(df_data,columns=['lighting','weather'], prefix=encode).astype(int)
+st.write("After pd.dummies input_df shape",input_df.shape)
+df_road = input_df.values
 st.write(df_road[:1])
 
 # Convert boolean variables to int
 df_road['road_signs_present'] = df_road['road_signs_present'].astype(int)
-st.write(df_road[:1])
+
 # Transform variable
 df_road['speed_limit'] = np.log(df_road['speed_limit'])
 
