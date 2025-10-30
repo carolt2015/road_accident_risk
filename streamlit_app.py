@@ -5,13 +5,10 @@ import pickle
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.preprocessing import PolynomialFeatures
 #from sklearn.linear_model import LinearRegression
-from sklearn.preprocessing import OneHotEncoder
 from pathlib import Path
 
-# Assuming pkl's are in the same directory as the app.py
+# Assuming pkl is in the same directory as the app.py
 model_path = Path(__file__).parent / "model.pkl"
-scaler_path = Path(__file__).parent / "scaler.pkl"
-poly_path = Path(__file__).parent / "poly.pkl"
 
 # Cache and load the trained model
 @st.cache_resource
@@ -20,23 +17,7 @@ def load_model():
         model = pickle.load(file)
     return model
     
-# Cache and load the min_max scaler    
-@st.cache_resource
-def load_scaler():
-    with open(scaler_path, 'rb') as file:
-        scaler = pickle.load(file)
-    return scaler 
-    
-# Cache and load the polynomial features used for training
-@st.cache_resource
-def load_poly():
-    with open(poly_path, 'rb') as file:
-        poly = pickle.load(file)
-    return poly 
-
 road_model = load_model() 
-minmax_scaler = load_scaler()
-poly_features = load_poly()
 
 st.title('Road Accident Risk Prediction')
 
@@ -67,7 +48,8 @@ st.write(" Dataframe shape",df_road.shape)
 # Encode variables
 encode = ['lighting','weather']
 
-df_road = pd.get_dummies(df_road,columns=['lighting','weather']).astype(int)
+df_dummies = pd.get_dummies(df_road,columns=['lighting','weather']).astype(int)
+df_road = pd.concat([df_road.drop(['lighting','weather'],axis=1),df_dummies, axis=1])
 st.write("After pd.dummies df_road shape",df_road.shape)
 st.write(df_road[:1])
 
