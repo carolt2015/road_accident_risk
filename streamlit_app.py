@@ -6,11 +6,11 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.preprocessing import PolynomialFeatures
 from pathlib import Path
 
-# Assuming pkl is in the same directory as the app.py
+# Assuming pkl's is in the same directory as the app.py
 model_path = Path(__file__).parent / "model.pkl"
 dummies_path = Path(__file__).parent / "dummies.pkl"
 
-# Cache and load the trained model
+# Cache and load trained model and dummies
 @st.cache_resource
 def load_resources():
     with open(model_path, 'rb') as file:
@@ -44,30 +44,32 @@ data  = { 'curvature':curvature,
          'weather': weather, 
          'road_signs_present':road_signs_present
         }
-# Convert user input to DataFrame    
+
+# Convert user input to a dataframe    
 df = pd.DataFrame(data,index=[0])
 
 # Adjust input format as per the model
 # Encode variables
 df_dummies = pd.get_dummies(df,columns=['lighting','weather'])
-
 # Reindex dataFrame to match the pickled dummies
 df_road = df_dummies.reindex(columns=road_dummies, fill_value=0)
 
+# Convert boolean variable to int
 df_road['road_signs_present'] =  df_road['road_signs_present'] .astype(int)
 
-# Transform variable
+# Transform and scale variable
 df_road['speed_limit'] = np.log(df_road['speed_limit'])
 scaler = MinMaxScaler(feature_range=(0,1))
 df_road['speed_limit'] = scaler.fit_transform(df_road[['speed_limit']]).astype(float)
 
-# Transform data with polynomial features
+# Feature engineering data with polynomial features
 poly = PolynomialFeatures(degree=2)
 df_road_poly =  poly.fit_transform(df_road)
 
-# Input data for prediction
+# Isolate input data for prediction
 input_row = df_road_poly[:1]
-    
+
+# On click 'Predict' button
 if predicted:
     prediction = road_model.predict(input_row)
     st.success(f"The chance of road accident is : {prediction[0] * 100:.2f}%")
