@@ -61,17 +61,13 @@ data  = { 'curvature':curvature,
         }
     
 df_data = pd.DataFrame(data,index=[0])
+st.write(" Dataframe shape",df_data.shape)
 
 # Adjust input format as per the model
 # Encode variables
 encode = ['lighting','weather']
-encoder = OneHotEncoder(sparse_output=False)
-encoded_features = encoder.fit_transform(df_data[encode])
-encoded_df = pd.DataFrame(encoded_features, columns=encoder.get_feature_names_out(encode))
-df = df_data.drop(columns=encode)
-df_road = pd.concat([df,encoded_df],axis=1)
 
-#df_road = pd.get_dummies(df_data,columns=['lighting','weather'], prefix=encode).astype(int)
+df_road = pd.get_dummies(df_data,columns=['lighting','weather'], prefix=encode).astype(int)
 st.write("After pd.dummies df_road shape",df_road.shape)
 st.write(df_road[:1])
 
@@ -81,7 +77,6 @@ df_road['road_signs_present'] = df_road['road_signs_present'].astype(int)
 
 # Transform variable
 df_road['speed_limit'] = np.log(df_road['speed_limit'])
-
 
 scaler = MinMaxScaler(feature_range=(0,1))
 df_road['speed_limit'] = scaler.fit_transform(df_road[['speed_limit']]).astype(float)
