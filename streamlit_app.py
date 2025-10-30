@@ -60,8 +60,8 @@ data  = { 'curvature':curvature,
         }
     
 df_road = pd.DataFrame(data,index=[0])
-st.write("Input_data",input_data[:1])
-st.write("Input_data",input_data.shape)
+st.write("Input_data",df_road[:1])
+st.write("Input_data",df_road.shape)
 # Adjust input format as per the model
 # Encode variables
 encode = ['lighting','weather']
