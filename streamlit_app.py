@@ -78,7 +78,7 @@ df_road['speed_limit'] = scaler.fit_transform(df_road[['speed_limit']])
 
 # Transform data with polynomial features
 poly = PolynomialFeatures(degree=2)
-df_road.reshape(-1, 1)
+st.write(df_road.shape)
 df_road_poly =  poly.fit_transform(df_road)
 
 st.write("df_road_poly",df_road_poly.shape)
