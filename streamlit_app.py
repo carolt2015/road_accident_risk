@@ -7,7 +7,7 @@ from sklearn.preprocessing import PolynomialFeatures
 from pathlib import Path
 
 st.title('Road Accident Risk Prediction App')
-st.info('This is a machine learning app that predicts road accidents.')
+st.info('This is a simple machine learning app that predicts road accidents.')
 
 # Assuming pkl's is in the same directory as the app.py
 model_path = Path(__file__).parent / "model.pkl"
