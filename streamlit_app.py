@@ -47,7 +47,7 @@ df = pd.DataFrame(data,index=[0])
 # Encode variables
 encode = ['lighting','weather']
 
-df_dummies = pd.get_dummies(df_road,columns=['lighting','weather']).astype(int)
+df_dummies = pd.get_dummies(df,columns=['lighting','weather']).astype(int)
 df_road_drop = df.drop(['lighting','weather'],axis=1)
 df_road = pd.concat([df_road_drop,df_dummies], axis=1)
 st.write("After pd.dummies df_dummies shape (1,6)",df_dummies.shape)
