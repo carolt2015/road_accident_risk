@@ -70,11 +70,10 @@ df_road_poly =  poly.fit_transform(df_road)
 # Isolate input data for prediction
 input_row = df_road_poly[:1]
 
-st.subheader("Prediction: ")
-
 # On click 'Predict' button
 if predicted:
     prediction = road_model.predict(input_row)
+    st.subheader("Prediction: ")
     st.success(f"The chance of road accident is : {prediction[0] * 100:.2f}%")
    
 
