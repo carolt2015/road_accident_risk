@@ -59,7 +59,7 @@ data  = { 'curvature':curvature,
          'road_signs_present':road_signs_present
         }
     
-input_df = pd.DataFrame(data,index=[0])
+input_data = pd.DataFrame(data,index=[0])
 
 # Adjust input format as per the model
 # Encode variables
