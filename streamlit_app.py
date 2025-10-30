@@ -24,6 +24,7 @@ road_model,road_dummies = load_resources()
 
 st.title('Road Accident Risk Prediction')
 
+# User input 
 with st.sidebar:
   st.header('Choose conditions for safe driving')
   curvature  = st.slider('Road Curvature',0.0,1.0)
@@ -36,20 +37,24 @@ with st.sidebar:
   # For 'Predict' button  
   predicted = st.button("Predict")  
     
-
+# User input as a dictionary
 data  = { 'curvature':curvature, 
          'speed_limit':speed_limit,
          'lighting':lighting,
          'weather': weather, 
          'road_signs_present':road_signs_present
         }
-    
+# Convert user input to DataFrame    
 df = pd.DataFrame(data,index=[0])
 
 # Adjust input format as per the model
 # Encode variables
-df_road = pd.get_dummies(df,columns=['lighting','weather'])
+df_dummies = pd.get_dummies(df,columns=['lighting','weather'])
+df_road = df_dummies.reindex(columns=road_dummies, fill_value=0)
 st.write(df_road.shape)
+
+
+
 df_road['road_signs_present'] =  df_road['road_signs_present'] .astype(int)
 
 
