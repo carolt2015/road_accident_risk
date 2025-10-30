@@ -6,6 +6,9 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.preprocessing import PolynomialFeatures
 from pathlib import Path
 
+st.title('Road Accident Risk Prediction App')
+st.info('This is a machine learning app that predicts road accidents, depending on the conditions you choose.')
+
 # Assuming pkl's is in the same directory as the app.py
 model_path = Path(__file__).parent / "model.pkl"
 dummies_path = Path(__file__).parent / "dummies.pkl"
@@ -21,8 +24,6 @@ def load_resources():
     return model,dummies
     
 road_model,road_dummies = load_resources() 
-
-st.title('Road Accident Risk Prediction')
 
 # User input 
 with st.sidebar:
