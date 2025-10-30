@@ -49,8 +49,8 @@ df = pd.DataFrame(data,index=[0])
   
 df_road = pd.get_dummies(df,columns=['lighting','weather']).astype(int)
 #df_dummies[['lighting_daylight','lighting_dim','lighting_night','weather_rainy','weather_clear','weather_foggy']] = pd.DataFrame([[0],[0],[0],[0],[0],[0]],index=df.index)
-df_dummies = pd.DataFrame({'lighting_daylight':[0],'lighting_dim':[0],'lighting_night':[0],'weather_rainy':[0],'weather_clear':[0],'weather_foggy':[0]})
-df_road = pd.concat([df_road,df_dummies]) 
+#df_dummies = pd.DataFrame({'lighting_daylight':[0],'lighting_dim':[0],'lighting_night':[0],'weather_rainy':[0],'weather_clear':[0],'weather_foggy':[0]})
+#df_road = pd.concat([df_road,df_dummies]) 
 st.write("Shape of df_road after adding dummies",df_road.shape)
 st.write(df_road[:1])
 
