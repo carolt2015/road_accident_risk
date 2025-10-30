@@ -61,7 +61,7 @@ data  = { 'curvature':curvature,
     
 input_data = pd.DataFrame(data,index=[0])
 st.write("Input_data",input_data[:1])
-
+st.write("Input_data",input_data.shape)
 # Adjust input format as per the model
 # Encode variables
 encode = ['lighting','weather']
