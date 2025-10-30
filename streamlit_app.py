@@ -70,7 +70,7 @@ input_row = df_road_poly[:1]
     
 if predicted:
     prediction = road_model.predict(input_row)
-    st.success(f"The chance of road accident is :{prediction[0] * 100}%")
+    st.success(f"The chance of road accident is :{prediction[0] * 100}.0f%")
     if prediction[0] >= 0.5:
         st.subheader("Please drive safely!")
     else:
