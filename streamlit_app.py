@@ -64,7 +64,7 @@ input_data = pd.DataFrame(data,index=[0])
 # Adjust input format as per the model
 # Encode variables
 encode = ['lighting','weather']
-df_road = pd.get_dummies(input_data,columns=['lighting','weather'], prefix=encode)
+df_road = pd.get_dummies(input_data,columns=['lighting','weather'], prefix=encode).astype(int)
 st.write("After pd.dummies",df_road.shape)
 st.write(df_road[:1])
 
@@ -73,10 +73,11 @@ df_road['road_signs_present'] = df_road['road_signs_present'].astype(int)
 st.write(df_road[:1])
 # Transform variable
 df_road['speed_limit'] = np.log(df_road['speed_limit'])
-st.write(df_road[:1])
+
 
 scaler = MinMaxScaler(feature_range=(0,1))
 df_road['speed_limit'] = scaler.fit_transform(df_road[['speed_limit']]).astype(float)
+st.write(df_road[:1])
 
 # Transform data with polynomial features
 poly = PolynomialFeatures(degree=2)
