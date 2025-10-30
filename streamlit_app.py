@@ -73,6 +73,7 @@ df_road = pd.concat([df,encoded_df],axis=1)
 
 #df_road = pd.get_dummies(df_data,columns=['lighting','weather'], prefix=encode).astype(int)
 st.write("After pd.dummies df_road shape",df_road.shape)
+st.write(df_road[:1])
 
 
 # Convert boolean variables to int
