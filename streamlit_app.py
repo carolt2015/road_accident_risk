@@ -57,6 +57,9 @@ df_road = pd.concat([df.drop(columns=['lighting','weather'],axis=1),df_dummies])
 st.write("shape of df_road", df_road.shape)
 st.write("Df_road rows", df_road[:1])
 
+if lighting == 'daylight':
+    df_road['lighting_daylight'] = 1
+
 
 #df_road['road_signs_present'] =  df_road['road_signs_present'] .astype(int)
 
