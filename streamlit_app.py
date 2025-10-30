@@ -60,14 +60,14 @@ data  = { 'curvature':curvature,
          'road_signs_present':road_signs_present
         }
     
-df_data = pd.DataFrame(data,index=[0])
+df_road = pd.DataFrame(data,index=[0])
 st.write(" Dataframe shape",df_data.shape)
 
 # Adjust input format as per the model
 # Encode variables
 encode = ['lighting','weather']
 
-df_road = pd.get_dummies(df_data,columns=['lighting','weather'], prefix=encode).astype(int)
+df_road = pd.get_dummies(df_road,columns=['lighting','weather']).astype(int)
 st.write("After pd.dummies df_road shape",df_road.shape)
 st.write(df_road[:1])
 
