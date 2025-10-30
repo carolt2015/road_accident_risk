@@ -4,7 +4,8 @@ import numpy as np
 import pickle 
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.preprocessing import PolynomialFeatures
-from sklearn.linear_model import LinearRegression
+#from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import OneHotEncoder
 from pathlib import Path
 
 # Assuming pkl's are in the same directory as the app.py
@@ -64,7 +65,13 @@ df_data = pd.DataFrame(data,index=[0])
 # Adjust input format as per the model
 # Encode variables
 encode = ['lighting','weather']
-df_road = pd.get_dummies(df_data,columns=['lighting','weather'], prefix=encode).astype(int)
+encoder = OneHotEncoder(sparse_output=False)
+encoded_features = encoder.fit_transform(df_data[encode])
+encoded_df = pd.DataFrame(encoded_features, columns=encoder.get_feature_names_out(encode))
+df = df_data.drop(columns=encode)
+df_road = pd.concat([df,encoded_df],axis=1)
+
+#df_road = pd.get_dummies(df_data,columns=['lighting','weather'], prefix=encode).astype(int)
 st.write("After pd.dummies df_road shape",df_road.shape)
 
 
