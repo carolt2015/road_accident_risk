@@ -4,7 +4,6 @@ import numpy as np
 import pickle 
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.preprocessing import PolynomialFeatures
-#from sklearn.linear_model import LinearRegression
 from pathlib import Path
 
 # Assuming pkl is in the same directory as the app.py
@@ -16,6 +15,7 @@ dummies_path = Path(__file__).parent / "dummies.pkl"
 def load_resources():
     with open(model_path, 'rb') as file:
         model = pickle.load(file)
+        
     with open(dummies_path, 'rb') as file:
         dummies = pickle.load(file)    
     return model,dummies
@@ -50,41 +50,31 @@ df = pd.DataFrame(data,index=[0])
 # Adjust input format as per the model
 # Encode variables
 df_dummies = pd.get_dummies(df,columns=['lighting','weather'])
+
+# Reindex dataFrame to match the pickled dummies
 df_road = df_dummies.reindex(columns=road_dummies, fill_value=0)
-st.write(df_road.shape)
-
-
 
 df_road['road_signs_present'] =  df_road['road_signs_present'] .astype(int)
 
-
 # Transform variable
 df_road['speed_limit'] = np.log(df_road['speed_limit'])
-
 scaler = MinMaxScaler(feature_range=(0,1))
 df_road['speed_limit'] = scaler.fit_transform(df_road[['speed_limit']]).astype(float)
-st.write(df_road[:1])
 
 # Transform data with polynomial features
 poly = PolynomialFeatures(degree=2)
-st.write("df_road Shape",df_road.shape)
-
 df_road_poly =  poly.fit_transform(df_road)
-
-st.write("df_road_poly",df_road_poly.shape)
 
 # Input data for prediction
 input_row = df_road_poly[:1]
-st.write("input_shape",input_row.shape)
-    
     
 if predicted:
     prediction = road_model.predict(input_row)
     st.success(f"The chance of road accident is :{prediction[0] * 100}%")
-    #if prediction[0] >= 0.5:
-    #    st.subheader("Please drive safely!")
-    #else:
-    #    st.subheader("That's great!")
+    if prediction[0] >= 0.5:
+        st.subheader("Please drive safely!")
+    else:
+        st.subheader("That's great!")
 
 
 
