@@ -28,7 +28,7 @@ with st.sidebar:
   lighting = st.selectbox('Lighting',('daylight','dim','night'))
   weather = st.selectbox('Weather',('rainy','clear','foggy'))
   # Selectbox with True and False as options  
-  road_signs_present = st.checkbox('Road Signs Present',options=[True, False],index=0)
+  road_signs_present = st.selectbox('Road Signs Present',options=[True, False],index=0)
 
   # For 'Predict' button  
   predicted = st.button("Predict")  
