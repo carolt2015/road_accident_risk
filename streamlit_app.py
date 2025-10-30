@@ -48,8 +48,8 @@ df = pd.DataFrame(data,index=[0])
 #encode = ['lighting','weather']
   
 df_road = pd.get_dummies(df,columns=['lighting','weather']).astype(int)
-#df_road[['lighting_daylight','lighting_dim','lighting_night','weather_rainy','weather_clear','weather_foggy']] = pd.DataFrame([[0],[0],[0],[0],[0],[0]],index=df.index)
-
+df_dummies[['lighting_daylight','lighting_dim','lighting_night','weather_rainy','weather_clear','weather_foggy']] = pd.DataFrame([[0],[0],[0],[0],[0],[0]],index=df.index)
+df_road = pd.concat([df_road,df_dummies]) 
 st.write("Shape of df_road after adding dummies",df_road.shape)
 
 # Convert boolean variables to int
