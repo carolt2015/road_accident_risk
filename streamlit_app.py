@@ -46,7 +46,7 @@ df = pd.DataFrame(data,index=[0])
 # Adjust input format as per the model
 # Encode variables
 #encode = ['lighting','weather']
-df[['lighting_daylight','lighting_dim','lighting_night','weather_rainy','weather_clear','weather_foggy ]] = 
+df[['lighting_daylight','lighting_dim','lighting_night','weather_rainy','weather_clear','weather_foggy' ]] = 
     pd.DataFrame([[0],[0],[0],[0],[0],[0]])
     
 df_road = pd.get_dummies(df,columns=['lighting','weather']).astype(int)
