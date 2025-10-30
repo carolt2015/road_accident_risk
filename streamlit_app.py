@@ -8,6 +8,7 @@ from pathlib import Path
 
 st.title('Road Accident Risk Prediction App')
 st.info('A simple machine learning app that predicts road accidents.')
+st.info('Choose conditions from the left side bar for prediction.')
 
 # Assuming pkl's is in the same directory as the app.py
 model_path = Path(__file__).parent / "model.pkl"
