@@ -28,7 +28,7 @@ with st.sidebar:
   lighting = st.selectbox('Lighting',('daylight','dim','night'))
   weather = st.selectbox('Weather',('rainy','clear','foggy'))
   # Selectbox with True and False as options  
-  road_signs_present = st.selectbox('Road Signs Present',options=[True, False],index=0)
+  road_signs_present = st.checkbox('Road Signs Present',options=[True, False],index=0)
 
   # For 'Predict' button  
   predicted = st.button("Predict")  
@@ -54,7 +54,7 @@ df_road = pd.concat([df_road,df_dummies])
 st.write("Shape of df_road after adding dummies",df_road.shape)
 st.write(df_road[:1])
 # Convert boolean variables to int
-df_road['road_signs_present'] = df_road['road_signs_present'].astype(int)
+#df_road['road_signs_present'] = df_road['road_signs_present'].astype(int)
 
 # Transform variable
 df_road['speed_limit'] = np.log(df_road['speed_limit'])
