@@ -60,6 +60,7 @@ data  = { 'curvature':curvature,
         }
     
 input_data = pd.DataFrame(data,index=[0])
+st.write("Input_data",input_data[:1])
 
 # Adjust input format as per the model
 # Encode variables
