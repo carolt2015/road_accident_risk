@@ -61,7 +61,7 @@ data  = { 'curvature':curvature,
         }
     
 df_road = pd.DataFrame(data,index=[0])
-st.write(" Dataframe shape",df_data.shape)
+st.write(" Dataframe shape",df_road.shape)
 
 # Adjust input format as per the model
 # Encode variables
