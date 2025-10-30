@@ -45,29 +45,10 @@ df = pd.DataFrame(data,index=[0])
 
 # Adjust input format as per the model
 # Encode variables
+df_road = pd.get_dummies(df,columns=['lighting','weather']).astype(int)
 
-#df_road = pd.get_dummies(df,columns=['lighting','weather']).astype(int)
-df_lighting = pd.DataFrame({'lighting': ['daylight','dim','night']})
-df_weather = pd.DataFrame({'weather': ['rainy','clear','foggy']})
-df_lighting_dummies = pd.get_dummies(df_lighting,columns=['lighting'])
-df_lighting_weather = pd.get_dummies(df_weather,columns=['weather'])
-df_dummies = pd.concat([df_lighting_dummies,df_lighting_weather])
+df_road['road_signs_present'] =  df_road['road_signs_present'] .astype(int)
 
-df_road = pd.concat([df.drop(columns=['lighting','weather'],axis=1),df_dummies])
-st.write("shape of df_road", df_road.shape)
-st.write("Df_road rows", df_road[:1])
-
-if lighting == 'daylight':
-    df_road['lighting_daylight'] = 1
-
-
-#df_road['road_signs_present'] =  df_road['road_signs_present'] .astype(int)
-
-# Convert boolean variables to int
-if road_signs_present == 'True':
-    df_road['road_signs_present'] = 1
-else:
-    df_road['road_signs_present'] = 0
 
 # Transform variable
 df_road['speed_limit'] = np.log(df_road['speed_limit'])
