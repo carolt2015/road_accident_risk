@@ -77,6 +77,8 @@ st.write(df_road[:1])
 
 # Transform data with polynomial features
 df_road_poly =  poly_features.fit_transform(df_road)
+st.write("df_road_poly",df_road_poly.shape)
+
 
 # Input data for prediction
 input_row = df_road_poly[:1]
