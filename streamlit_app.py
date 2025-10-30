@@ -45,7 +45,7 @@ df = pd.DataFrame(data,index=[0])
 
 # Adjust input format as per the model
 # Encode variables
-df_road = pd.get_dummies(df,columns=['lighting','weather'],dtype=float)
+df_road = pd.get_dummies(df,columns=['lighting','weather'])
 
 df_road['road_signs_present'] =  df_road['road_signs_present'] .astype(int)
 
