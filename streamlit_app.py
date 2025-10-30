@@ -52,7 +52,7 @@ df_dummies = pd.get_dummies(df_road,columns=['lighting','weather']).astype(int)
 df_road_drop = df_road.drop(['lighting','weather'],axis=1)
 df_road = pd.concat([df_road_drop,df_dummies], axis=1)
 st.write("After pd.dummies df_dummies shape",df_dummies.shape)
-st.write(df_dummies[:1])
+st.write("Dummies row",df_dummies[:1])
 
 
 # Convert boolean variables to int
