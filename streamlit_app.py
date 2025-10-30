@@ -64,10 +64,9 @@ df_data = pd.DataFrame(data,index=[0])
 # Adjust input format as per the model
 # Encode variables
 encode = ['lighting','weather']
-input_df = pd.get_dummies(df_data,columns=['lighting','weather'], prefix=encode).astype(int)
-st.write("After pd.dummies input_df shape",input_df.shape)
-df_road = input_df.values
-st.write(df_road[:1])
+df_road = pd.get_dummies(df_data,columns=['lighting','weather'], prefix=encode).astype(int)
+st.write("After pd.dummies df_road shape",df_road.shape)
+
 
 # Convert boolean variables to int
 df_road['road_signs_present'] = df_road['road_signs_present'].astype(int)
