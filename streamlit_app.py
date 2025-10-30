@@ -53,8 +53,12 @@ df_dummies = pd.DataFrame({'lighting_daylight':[0],'lighting_dim':[0],'lighting_
 df_road = pd.concat([df_road,df_dummies]) 
 st.write("Shape of df_road after adding dummies",df_road.shape)
 st.write(df_road[:1])
+
 # Convert boolean variables to int
-#df_road['road_signs_present'] = df_road['road_signs_present'].astype(int)
+if road_signs_present == 'True':
+    df_road['road_signs_present'] = 1
+else:
+    df_road['road_signs_present'] = 0
 
 # Transform variable
 df_road['speed_limit'] = np.log(df_road['speed_limit'])
