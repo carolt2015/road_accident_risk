@@ -56,9 +56,10 @@ df_road = pd.get_dummies(input_data,columns=['lighting','weather'], prefix=encod
 
 # Convert boolean variables to int
 df_road['road_signs_present'] = df_road['road_signs_present'].astype(int)
-
+st.write(df_road[:1])
 # Transform variable
 df_road['speed_limit'] = np.log(df_road['speed_limit'])
+st.write(df_road[:1])
 df_road['speed_limit'] = minmax_scaler.fit_transform(df_road[['speed_limit']])
 st.write(df_road[:1])
 
