@@ -35,7 +35,7 @@ def load_poly():
 
 road_model = load_model() 
 minmax_scaler = load_scaler()
-poly_features = load_poly()
+poly = load_poly()
 
 st.title('Road Accident Risk Prediction')
 
@@ -76,18 +76,11 @@ scaler = MinMaxScaler(feature_range=(0,1))
 df_road['speed_limit'] = minmax_scaler.fit_transform(df_road[['speed_limit']])
 
 # Transform data with polynomial features
-df_road_poly =  st.session_state.poly.fit_transform(df_road)
+df_road_poly =  poly.fit_transform(df_road)
 st.write("df_road_poly",df_road_poly.shape)
 
-
-if "poly" not in st.session_state:
-    st.session_state.poly = PolynomialFeatures(degree=2)
-    st.session_state.poly.fit(df_road)
-
 # Input data for prediction
-df = st.session_state.poly.transform(df_road_poly)
-st.write("df",df.shape)
-input_row = df[:1]
+input_row = df_road_poly[:1]
 st.write(input_row.shape)
     
     
